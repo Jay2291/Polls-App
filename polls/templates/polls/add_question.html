@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Question</title>
+</head>
+<body>
+{% if errors %}
+    <p> {{ errors }} </p>
+{% endif %}
+<form action="{% url 'polls:add_question' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="question_options_div_id">
+        <input type="text" placeholder="Choice" name="q_choices">
+    </div>
+    <input type="button" value="Add Choice" id="btn_add_choice" onclick="add_choice()">
+    <input type="submit" value="Add Question">
+</form>
+<script>
+    function add_choice() {
+        var choice_div = document.getElementById("question_options_div_id");
+        var new_choice = document.createElement('input')
+        new_choice.name = "q_choices"
+        new_choice.placeholder = "Choice"
+        choice_div.appendChild(new_choice);
+    }
+</script>
+</body>
+</html>
